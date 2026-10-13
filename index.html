@@ -1,4 +1,367 @@
 
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AppColor | Aplicativo</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: #fff5fb;
+            color: #35243f;
+        }
+
+        header {
+            background: white;
+            padding: 18px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 3px 15px #00000010;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: #ed4eaa;
+        }
+
+        .logo span {
+            color: #8055db;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #493852;
+            margin-left: 22px;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            color: #ed4eaa;
+        }
+
+        .inicio {
+            min-height: 85vh;
+            padding: 70px 8%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 40px;
+            background: linear-gradient(135deg, #ffe1f1, #eee4ff);
+        }
+
+        .texto {
+            max-width: 570px;
+        }
+
+        .texto h1 {
+            font-size: clamp(38px, 5vw, 60px);
+            line-height: 1.1;
+            margin-bottom: 20px;
+        }
+
+        .destaque {
+            color: #ed4eaa;
+        }
+
+        .texto p {
+            color: #6c5a73;
+            font-size: 18px;
+            line-height: 1.8;
+            margin-bottom: 28px;
+        }
+
+        .botao {
+            display: inline-block;
+            padding: 15px 25px;
+            border-radius: 30px;
+            background: linear-gradient(90deg, #ed4eaa, #8055db);
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            transition: .3s;
+        }
+
+        .botao:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px #8055db40;
+        }
+
+        .ilustracao {
+            width: 300px;
+            height: 300px;
+            min-width: 220px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #ed4eaa, #8055db);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 115px;
+            box-shadow: 0 20px 50px #8055db40;
+        }
+
+        section.conteudo {
+            padding: 75px 8%;
+            text-align: center;
+        }
+
+        .titulo {
+            font-size: 34px;
+            margin-bottom: 15px;
+        }
+
+        .subtitulo {
+            color: #76677d;
+            margin-bottom: 40px;
+            line-height: 1.7;
+        }
+
+        .cartoes {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .cartao {
+            background: white;
+            padding: 30px 22px;
+            border-radius: 22px;
+            box-shadow: 0 8px 25px #5d347010;
+            transition: .3s;
+        }
+
+        .cartao:hover {
+            transform: translateY(-7px);
+        }
+
+        .icone {
+            font-size: 42px;
+            margin-bottom: 15px;
+        }
+
+        .cartao h3 {
+            margin-bottom: 12px;
+            color: #8055db;
+        }
+
+        .cartao p {
+            color: #76677d;
+            line-height: 1.7;
+        }
+
+        .sobre {
+            background: #f0e8ff;
+        }
+
+        .sobre p {
+            max-width: 750px;
+            margin: 0 auto;
+            color: #62546c;
+            font-size: 17px;
+            line-height: 1.9;
+        }
+
+        .contato {
+            background: #35243f;
+            color: white;
+        }
+
+        .contato p {
+            color: #e6d8ee;
+            margin: 15px 0 25px;
+            line-height: 1.8;
+        }
+
+        footer {
+            background: white;
+            text-align: center;
+            padding: 22px;
+            color: #76677d;
+        }
+
+        @media (max-width: 750px) {
+            header {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            nav {
+                display: flex;
+                justify-content: center;
+                flex-wrap: wrap;
+                gap: 12px;
+            }
+
+            nav a {
+                margin: 0;
+                font-size: 14px;
+            }
+
+            .inicio {
+                flex-direction: column;
+                text-align: center;
+                padding: 55px 7%;
+            }
+
+            .ilustracao {
+                width: 220px;
+                height: 220px;
+                font-size: 85px;
+            }
+
+            .cartoes {
+                grid-template-columns: 1fr;
+            }
+
+            .titulo {
+                font-size: 28px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="logo">App<span>Color</span> ✿</div>
+
+        <nav>
+            <a href="#inicio">Início</a>
+            <a href="#funcionalidades">Funcionalidades</a>
+            <a href="#sobre">Sobre</a>
+            <a href="#contato">Contato</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="inicio" id="inicio">
+            <div class="texto">
+                <h1>
+                    Bem-vindo ao
+                    <span class="destaque">AppColor!</span>
+                </h1>
+
+                <p>
+                    Um projeto de aplicativo moderno, criativo e intuitivo,
+                    desenvolvido para oferecer uma experiência simples,
+                    agradável e cheia de possibilidades.
+                </p>
+
+                <a href="#funcionalidades" class="botao">
+                    Conheça o projeto ✨
+                </a>
+            </div>
+
+            <div class="ilustracao" aria-label="Paleta de cores">
+                🎨
+            </div>
+        </section>
+
+        <section class="conteudo" id="funcionalidades">
+            <h2 class="titulo">O que você encontra no AppColor?</h2>
+
+            <p class="subtitulo">
+                Conheça as características da nossa proposta.
+            </p>
+
+            <div class="cartoes">
+                <article class="cartao">
+                    <div class="icone">💗</div>
+                    <h3>Design moderno</h3>
+                    <p>
+                        Uma interface bonita, organizada e agradável,
+                        com cores que tornam a navegação mais atrativa.
+                    </p>
+                </article>
+
+                <article class="cartao">
+                    <div class="icone">📱</div>
+                    <h3>Fácil utilização</h3>
+                    <p>
+                        Uma proposta intuitiva, pensada para facilitar
+                        o acesso às informações e funcionalidades.
+                    </p>
+                </article>
+
+                <article class="cartao">
+                    <div class="icone">🌈</div>
+                    <h3>Criatividade</h3>
+                    <p>
+                        Uma ideia que une tecnologia, inovação e
+                        criatividade em um projeto cheio de possibilidades.
+                    </p>
+                </article>
+            </div>
+        </section>
+
+        <section class="conteudo sobre" id="sobre">
+            <h2 class="titulo">Sobre o AppColor</h2>
+
+            <p>
+                O AppColor é um projeto de aplicativo que busca unir
+                tecnologia, praticidade e um visual moderno. Este site
+                apresenta a proposta inicial do projeto e poderá ser
+                atualizado com informações e funcionalidades à medida
+                que o aplicativo for desenvolvido.
+            </p>
+        </section>
+
+        <section class="conteudo contato" id="contato">
+            <h2 class="titulo">Faça parte dessa ideia!</h2>
+
+            <p>
+                O AppColor está em desenvolvimento.
+                Acompanhe as novidades e descubra as próximas etapas
+                desse projeto.
+            </p>
+
+            <button class="botao" onclick="mostrarMensagem()">
+                Saiba mais 💜
+            </button>
+
+            <p id="mensagem" aria-live="polite"></p>
+        </section>
+    </main>
+
+    <footer>
+        <p>
+            © <span id="ano"></span> AppColor.
+            Todos os direitos reservados.
+        </p>
+    </footer>
+
+    <script>
+        function mostrarMensagem() {
+            document.getElementById("mensagem").textContent =
+                "Obrigado pelo interesse no AppColor! 💗";
+        }
+
+        document.getElementById("ano").textContent =
+            new Date().getFullYear();
+    </script>
+
+</body>
+</html>
+
 <section class="conteudo" id="participantes">
     <h2 class="titulo">Participantes do Projeto</h2>
 
