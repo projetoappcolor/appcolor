@@ -4,210 +4,153 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AppColor - Pinte e Crie</title>
+<title>Mini Paint - Estúdio de Desenho</title>
 
 <style>
 * {
-    margin: 0;
-    padding: 0;
     box-sizing: border-box;
 }
 
 body {
+    margin: 0;
     font-family: Arial, sans-serif;
-    background: #fff5fa;
-    color: #444;
+    background: #eef1f6;
+    color: #263247;
 }
 
 header {
-    background: linear-gradient(135deg, #ff75a8, #b77cff);
+    background: #263b65;
     color: white;
-    padding: 25px;
+    padding: 18px;
     text-align: center;
 }
 
 header h1 {
-    font-size: 32px;
-}
-
-header p {
-    margin-top: 8px;
+    margin: 0;
 }
 
 nav {
     display: flex;
     justify-content: center;
-    gap: 12px;
-    padding: 18px;
+    gap: 10px;
+    padding: 15px;
+    background: white;
     flex-wrap: wrap;
 }
 
-nav button {
+button {
     border: none;
-    background: #ff83b2;
-    color: white;
-    padding: 13px 24px;
-    border-radius: 25px;
+    padding: 11px 16px;
+    border-radius: 8px;
     cursor: pointer;
+    background: #e0e7f3;
+    color: #263b65;
     font-weight: bold;
 }
 
-nav button:hover {
-    background: #d94f8b;
+button:hover {
+    background: #c6d5ed;
 }
 
-main {
-    max-width: 1100px;
-    margin: auto;
-    padding: 20px;
-}
-
-section {
-    display: none;
-}
-
-section.active {
-    display: block;
-}
-
-h2 {
-    text-align: center;
-    color: #d94f8b;
-    margin: 15px 0 25px;
-}
-
-.gallery {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 20px;
-}
-
-.card {
-    background: white;
-    border-radius: 18px;
-    padding: 15px;
-    text-align: center;
-    box-shadow: 0 3px 12px #00000012;
-}
-
-.card img {
-    width: 100%;
-    height: 150px;
-    object-fit: contain;
-}
-
-.card button {
-    margin-top: 12px;
-    padding: 10px 20px;
-    background: #ff75a8;
-    border: none;
+button.active {
+    background: #4169ad;
     color: white;
-    border-radius: 20px;
-    cursor: pointer;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 15px;
 }
 
 .toolbar {
     display: flex;
-    justify-content: center;
-    gap: 10px;
     flex-wrap: wrap;
-    margin: 15px 0;
+    align-items: center;
+    gap: 12px;
+    background: white;
+    padding: 15px;
+    border-radius: 12px;
+    margin-bottom: 15px;
 }
 
-.toolbar button,
-.toolbar input {
-    padding: 10px;
+.toolbar label {
+    font-size: 13px;
+    font-weight: bold;
+}
+
+input[type="color"] {
+    width: 45px;
+    height: 35px;
     border: none;
-    border-radius: 10px;
     cursor: pointer;
 }
 
-.toolbar button {
-    background: #b77cff;
+input[type="range"] {
+    width: 100px;
+}
+
+.canvas-area {
+    background: white;
+    padding: 10px;
+    border-radius: 12px;
+    box-shadow: 0 3px 12px #0001;
+    overflow: auto;
+}
+
+canvas {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    background: white;
+    border: 1px solid #ddd;
+    touch-action: none;
+    cursor: crosshair;
+}
+
+#gallery {
+    display: none;
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 18px;
+}
+
+.drawing-card {
+    background: white;
+    padding: 12px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 3px 10px #0001;
+}
+
+.drawing-card img {
+    width: 100%;
+    height: 150px;
+    object-fit: contain;
+    background: #fafafa;
+}
+
+.drawing-card h3 {
+    margin: 10px;
+}
+
+.drawing-card button {
+    width: 100%;
+    background: #4169ad;
     color: white;
 }
 
-.colors {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin: 20px 0;
-}
-
-.color {
-    width: 35px;
-    height: 35px;
-    border-radius: 50%;
-    border: 2px solid white;
-    cursor: pointer;
-    box-shadow: 0 1px 5px #999;
-}
-
-.color.selected {
-    outline: 3px solid #555;
-}
-
-#drawingCanvas {
-    display: block;
-    width: 100%;
-    max-width: 750px;
-    height: auto;
-    aspect-ratio: 4 / 3;
-    background: white;
-    border: 3px solid #ff83b2;
-    border-radius: 15px;
-    margin: 20px auto;
-    touch-action: none;
-}
-
-#paintArea {
-    width: 100%;
-    max-width: 750px;
-    min-height: 350px;
-    background: white;
-    border: 3px solid #ff83b2;
-    border-radius: 15px;
-    margin: 20px auto;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 10px;
-}
-
-#paintArea svg {
-    width: 100%;
-    max-height: 480px;
-}
-
-.paintable {
-    fill: white;
-    stroke: #333;
-    stroke-width: 3;
-    stroke-linejoin: round;
-    cursor: pointer;
-}
-
-.paintable:hover {
-    stroke: #ff75a8;
+#editor h2, #gallery h2 {
+    margin-top: 0;
 }
 
 footer {
-    margin-top: 35px;
-    background: #b77cff;
-    color: white;
     text-align: center;
     padding: 20px;
-}
-
-@media(max-width: 600px) {
-    header h1 {
-        font-size: 26px;
-    }
-
-    main {
-        padding: 12px;
-    }
+    color: #718096;
 }
 </style>
 </head>
@@ -215,302 +158,113 @@ footer {
 <body>
 
 <header>
-    <h1>🎨 AppColor</h1>
-    <p>Solte sua criatividade e transforme cores em arte!</p>
+    <h1>🎨 Mini Paint</h1>
+    <p>Desenhe, pinte e solte sua criatividade!</p>
 </header>
 
 <nav>
-    <button onclick="showPage('home')">🏠 Início</button>
-    <button onclick="showPage('gallery')">🖍️ Desenhos para pintar</button>
-    <button onclick="showPage('free')">✏️ Desenho livre</button>
+    <button id="tabPaint" class="active" onclick="showTab('paint')">
+        🖌️ Desenho Livre
+    </button>
+
+    <button id="tabGallery" onclick="showTab('gallery')">
+        🖼️ Desenhos para Colorir
+    </button>
 </nav>
 
-<main>
+<div class="container">
 
-<!-- INÍCIO -->
-<section id="home" class="active">
-    <h2>Bem-vindo ao AppColor!</h2>
+<section id="editor">
 
-    <div class="card">
-        <h3>🌈 Pinte, crie e divirta-se!</h3>
-        <p style="margin:15px">
-            Escolha um desenho pronto para colorir ou crie sua própria arte
-            na área de desenho livre.
-        </p>
-        <button onclick="showPage('gallery')">Começar a pintar</button>
+    <h2>Área de desenho</h2>
+
+    <div class="toolbar">
+
+        <label>Ferramenta</label>
+
+        <select id="tool">
+            <option value="brush">Pincel</option>
+            <option value="eraser">Borracha</option>
+            <option value="line">Linha</option>
+            <option value="rectangle">Retângulo</option>
+            <option value="circle">Círculo</option>
+            <option value="fill">Balde de tinta</option>
+        </select>
+
+        <label>Cor</label>
+        <input type="color" id="color" value="#000000">
+
+        <label>Espessura</label>
+        <input type="range" id="size" min="1" max="40" value="5">
+
+        <button onclick="undo()">↶ Desfazer</button>
+        <button onclick="redo()">↷ Refazer</button>
+        <button onclick="clearCanvas()">🗑 Limpar</button>
+        <button onclick="saveImage()">💾 Salvar PNG</button>
+
     </div>
+
+    <div class="canvas-area">
+        <canvas id="canvas" width="1100" height="650"></canvas>
+    </div>
+
 </section>
 
-<!-- GALERIA -->
 <section id="gallery">
-    <h2>Escolha seu desenho favorito</h2>
-    <div class="gallery" id="galleryList"></div>
+
+    <h2>Escolha um desenho para colorir!</h2>
+    <p>Selecione um modelo e comece a pintar.</p>
+
+    <div class="gallery-grid" id="drawingGrid"></div>
+
 </section>
 
-<!-- PINTURA -->
-<section id="painting">
-    <h2 id="paintTitle">Vamos colorir!</h2>
-
-    <p style="text-align:center">
-        Clique nas partes do desenho para escolher suas cores.
-    </p>
-
-    <div class="colors" id="paintColors"></div>
-
-    <div class="toolbar">
-        <button onclick="clearPaint()">Limpar cores</button>
-        <button onclick="downloadPaint()">Salvar desenho</button>
-        <button onclick="showPage('gallery')">Voltar à galeria</button>
-    </div>
-
-    <div id="paintArea"></div>
-</section>
-
-<!-- DESENHO LIVRE -->
-<section id="free">
-    <h2>Seu espaço de desenho livre ✨</h2>
-
-    <p style="text-align:center">
-        Use o mouse ou o dedo para desenhar!
-    </p>
-
-    <div class="colors" id="freeColors"></div>
-
-    <div class="toolbar">
-        <label>
-            Tamanho:
-            <input type="range" id="brushSize"
-                min="2" max="30" value="6">
-        </label>
-
-        <button onclick="setEraser()">Borracha</button>
-        <button onclick="setBrush()">Pincel</button>
-        <button onclick="clearCanvas()">Apagar tudo</button>
-        <button onclick="downloadCanvas()">Baixar arte</button>
-    </div>
-
-    <canvas id="drawingCanvas" width="900" height="675"></canvas>
-</section>
-
-</main>
+</div>
 
 <footer>
-    <p>AppColor © 2026 - Criatividade sem limites! 💗</p>
+    Mini Paint © 2026 - Crie sua própria arte!
 </footer>
 
 <script>
 
-// NAVEGAÇÃO
-function showPage(page) {
-    document.querySelectorAll("main section").forEach(s => {
-        s.classList.remove("active");
-    });
-
-    document.getElementById(page).classList.add("active");
-}
-
-// PALETA DE CORES
-const palette = [
-    "#ff0000", "#ff8c00", "#ffff00",
-    "#00c853", "#00bcd4", "#0066ff",
-    "#8000ff", "#ff69b4", "#8b4513",
-    "#000000", "#ffffff", "#808080"
-];
-
-let selectedColor = "#ff69b4";
-let eraser = false;
-
-function createPalette(elementId, callback) {
-    const container = document.getElementById(elementId);
-    container.innerHTML = "";
-
-    palette.forEach(color => {
-        const btn = document.createElement("button");
-        btn.className = "color";
-        btn.style.background = color;
-        btn.title = color;
-
-        btn.onclick = () => {
-            selectedColor = color;
-            eraser = false;
-            container.querySelectorAll(".color").forEach(b =>
-                b.classList.remove("selected")
-            );
-            btn.classList.add("selected");
-            if (callback) callback(color);
-        };
-
-        container.appendChild(btn);
-    });
-
-    container.querySelector(".color").classList.add("selected");
-}
-
-createPalette("paintColors");
-createPalette("freeColors");
-
-// DESENHOS PREDEFINIDOS
-const drawings = [
-{
-    name: "Gatinho",
-    emoji: "🐱",
-    svg: `
-    <svg viewBox="0 0 300 260">
-      <path class="paintable" d="M70 100 L65 30 L125 65 Q150 55 175 65 L235 30 L230 100 Q250 140 225 185 Q200 225 150 225 Q100 225 75 185 Q50 140 70 100Z"/>
-      <ellipse class="paintable" cx="115" cy="125" rx="10" ry="14"/>
-      <ellipse class="paintable" cx="185" cy="125" rx="10" ry="14"/>
-      <path class="paintable" d="M140 155 Q150 145 160 155 Q150 175 140 155Z"/>
-      <path d="M150 170 Q130 190 115 175 M150 170 Q170 190 185 175" fill="none" stroke="black" stroke-width="3"/>
-      <path d="M80 155 L30 145 M80 170 L30 175 M220 155 L270 145 M220 170 L270 175" stroke="black" stroke-width="3"/>
-    </svg>`
-},
-{
-    name: "Borboleta",
-    emoji: "🦋",
-    svg: `
-    <svg viewBox="0 0 300 260">
-      <ellipse class="paintable" cx="90" cy="100" rx="65" ry="65"/>
-      <ellipse class="paintable" cx="210" cy="100" rx="65" ry="65"/>
-      <ellipse class="paintable" cx="90" cy="190" rx="45" ry="45"/>
-      <ellipse class="paintable" cx="210" cy="190" rx="45" ry="45"/>
-      <ellipse class="paintable" cx="150" cy="145" rx="13" ry="75"/>
-      <path d="M145 75 Q110 15 100 30 M155 75 Q190 15 200 30" fill="none" stroke="black" stroke-width="3"/>
-    </svg>`
-},
-{
-    name: "Flor",
-    emoji: "🌸",
-    svg: `
-    <svg viewBox="0 0 300 280">
-      <circle class="paintable" cx="150" cy="130" r="35"/>
-      <circle class="paintable" cx="150" cy="65" r="35"/>
-      <circle class="paintable" cx="215" cy="130" r="35"/>
-      <circle class="paintable" cx="150" cy="195" r="35"/>
-      <circle class="paintable" cx="85" cy="130" r="35"/>
-      <path class="paintable" d="M145 225 L155 225 L160 270 L140 270Z"/>
-      <ellipse class="paintable" cx="115" cy="245" rx="30" ry="12" transform="rotate(-30 115 245)"/>
-      <ellipse class="paintable" cx="185" cy="245" rx="30" ry="12" transform="rotate(30 185 245)"/>
-    </svg>`
-},
-{
-    name: "Peixinho",
-    emoji: "🐠",
-    svg: `
-    <svg viewBox="0 0 300 250">
-      <path class="paintable" d="M55 125 Q120 35 220 125 Q120 215 55 125Z"/>
-      <path class="paintable" d="M215 125 L275 65 L275 185Z"/>
-      <circle class="paintable" cx="100" cy="110" r="10"/>
-      <path class="paintable" d="M145 95 Q180 125 145 155"/>
-      <circle class="paintable" cx="190" cy="95" r="8"/>
-    </svg>`
-},
-{
-    name: "Casinha",
-    emoji: "🏠",
-    svg: `
-    <svg viewBox="0 0 300 270">
-      <path class="paintable" d="M40 125 L150 30 L260 125 L245 140 L150 60 L55 140Z"/>
-      <rect class="paintable" x="65" y="125" width="170" height="125"/>
-      <rect class="paintable" x="125" y="175" width="50" height="75"/>
-      <rect class="paintable" x="85" y="145" width="35" height="35"/>
-      <rect class="paintable" x="180" y="145" width="35" height="35"/>
-    </svg>`
-}
-];
-
-// MONTAR GALERIA
-const galleryList = document.getElementById("galleryList");
-
-drawings.forEach((drawing, index) => {
-    const card = document.createElement("div");
-    card.className = "card";
-
-    const preview = drawing.svg
-        .replaceAll('class="paintable"', 'fill="#ffffff" stroke="#333" stroke-width="3"');
-
-    card.innerHTML = `
-        <div style="height:150px">${preview}</div>
-        <h3>${drawing.emoji} ${drawing.name}</h3>
-        <button onclick="openDrawing(${index})">Colorir desenho</button>
-    `;
-
-    galleryList.appendChild(card);
-});
-
-// ABRIR DESENHO
-function openDrawing(index) {
-    const drawing = drawings[index];
-
-    document.getElementById("paintTitle").textContent =
-        drawing.emoji + " " + drawing.name;
-
-    const area = document.getElementById("paintArea");
-    area.innerHTML = drawing.svg;
-
-    area.querySelectorAll(".paintable").forEach(part => {
-        part.addEventListener("click", () => {
-            part.style.fill = selectedColor;
-        });
-    });
-
-    showPage("painting");
-}
-
-// LIMPAR PINTURA
-function clearPaint() {
-    const area = document.getElementById("paintArea");
-
-    area.querySelectorAll(".paintable").forEach(part => {
-        part.style.fill = "white";
-    });
-}
-
-// SALVAR PINTURA
-function downloadPaint() {
-    const svg = document.querySelector("#paintArea svg");
-    if (!svg) return;
-
-    const copy = svg.cloneNode(true);
-
-    copy.querySelectorAll(".paintable").forEach(part => {
-        part.setAttribute("fill", part.style.fill || "white");
-    });
-
-    const source = new XMLSerializer().serializeToString(copy);
-    const blob = new Blob([source], {
-        type: "image/svg+xml;charset=utf-8"
-    });
-
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = "minha-pintura.svg";
-    a.click();
-    URL.revokeObjectURL(url);
-}
-
-// DESENHO LIVRE
-const canvas = document.getElementById("drawingCanvas");
+const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 
-let painting = false;
-let lastX = 0;
-let lastY = 0;
+let drawing = false;
+let startX = 0;
+let startY = 0;
+let snapshot = null;
+
+let undoStack = [];
+let redoStack = [];
 
 ctx.lineCap = "round";
 ctx.lineJoin = "round";
-ctx.lineWidth = 6;
-ctx.strokeStyle = selectedColor;
 
-function setBrush() {
-    eraser = false;
-    ctx.globalCompositeOperation = "source-over";
-    ctx.strokeStyle = selectedColor;
+function saveState() {
+    undoStack.push(ctx.getImageData(0, 0, canvas.width, canvas.height));
+
+    if (undoStack.length > 30) {
+        undoStack.shift();
+    }
+
+    redoStack = [];
 }
 
-function setEraser() {
-    eraser = true;
-    ctx.globalCompositeOperation = "destination-out";
+function undo() {
+    if (!undoStack.length) return;
+
+    redoStack.push(ctx.getImageData(0, 0, canvas.width, canvas.height));
+
+    ctx.putImageData(undoStack.pop(), 0, 0);
+}
+
+function redo() {
+    if (!redoStack.length) return;
+
+    undoStack.push(ctx.getImageData(0, 0, canvas.width, canvas.height));
+
+    ctx.putImageData(redoStack.pop(), 0, 0);
 }
 
 function getPosition(e) {
@@ -522,63 +276,353 @@ function getPosition(e) {
     };
 }
 
-canvas.addEventListener("pointerdown", e => {
-    painting = true;
-    canvas.setPointerCapture(e.pointerId);
-
-    const pos = getPosition(e);
-    lastX = pos.x;
-    lastY = pos.y;
-
-    ctx.beginPath();
-    ctx.moveTo(lastX, lastY);
-    ctx.lineTo(lastX + 0.1, lastY + 0.1);
-    ctx.stroke();
-});
-
-canvas.addEventListener("pointermove", e => {
-    if (!painting) return;
-
-    const pos = getPosition(e);
-
-    ctx.lineWidth = document.getElementById("brushSize").value;
-
-    if (eraser) {
-        ctx.globalCompositeOperation = "destination-out";
-    } else {
-        ctx.globalCompositeOperation = "source-over";
-        ctx.strokeStyle = selectedColor;
-    }
-
-    ctx.beginPath();
-    ctx.moveTo(lastX, lastY);
-    ctx.lineTo(pos.x, pos.y);
-    ctx.stroke();
-
-    lastX = pos.x;
-    lastY = pos.y;
-});
-
-function stopDrawing() {
-    painting = false;
+function getSettings() {
+    return {
+        tool: document.getElementById("tool").value,
+        color: document.getElementById("color").value,
+        size: Number(document.getElementById("size").value)
+    };
 }
 
+canvas.addEventListener("pointerdown", startDrawing);
+canvas.addEventListener("pointermove", draw);
 canvas.addEventListener("pointerup", stopDrawing);
 canvas.addEventListener("pointercancel", stopDrawing);
-canvas.addEventListener("lostpointercapture", stopDrawing);
+canvas.addEventListener("pointerleave", stopDrawing);
 
-// LIMPAR TELA
+function startDrawing(e) {
+    if (e.button !== undefined && e.button !== 0) return;
+
+    e.preventDefault();
+
+    const pos = getPosition(e);
+    const settings = getSettings();
+
+    if (settings.tool === "fill") {
+        saveState();
+        floodFill(
+            Math.floor(pos.x),
+            Math.floor(pos.y),
+            hexToRgba(settings.color)
+        );
+        return;
+    }
+
+    saveState();
+
+    drawing = true;
+    startX = pos.x;
+    startY = pos.y;
+
+    if (settings.tool === "brush" || settings.tool === "eraser") {
+        ctx.beginPath();
+        ctx.moveTo(pos.x, pos.y);
+        ctx.lineWidth = settings.size;
+        ctx.strokeStyle = settings.tool === "eraser"
+            ? "#ffffff" : settings.color;
+        ctx.globalCompositeOperation = "source-over";
+        ctx.lineTo(pos.x + 0.1, pos.y);
+        ctx.stroke();
+    } else {
+        snapshot = ctx.getImageData(0, 0, canvas.width, canvas.height);
+    }
+
+    canvas.setPointerCapture(e.pointerId);
+}
+
+function draw(e) {
+    if (!drawing) return;
+
+    e.preventDefault();
+
+    const pos = getPosition(e);
+    const settings = getSettings();
+
+    if (settings.tool === "brush" || settings.tool === "eraser") {
+        ctx.lineWidth = settings.size;
+        ctx.strokeStyle = settings.tool === "eraser"
+            ? "#ffffff" : settings.color;
+
+        ctx.beginPath();
+        ctx.moveTo(startX, startY);
+        ctx.lineTo(pos.x, pos.y);
+        ctx.stroke();
+
+        startX = pos.x;
+        startY = pos.y;
+
+    } else if (snapshot) {
+        ctx.putImageData(snapshot, 0, 0);
+
+        ctx.lineWidth = settings.size;
+        ctx.strokeStyle = settings.color;
+
+        ctx.beginPath();
+
+        if (settings.tool === "line") {
+            ctx.moveTo(startX, startY);
+            ctx.lineTo(pos.x, pos.y);
+        }
+
+        if (settings.tool === "rectangle") {
+            ctx.rect(
+                startX,
+                startY,
+                pos.x - startX,
+                pos.y - startY
+            );
+        }
+
+        if (settings.tool === "circle") {
+            const radius = Math.hypot(
+                pos.x - startX,
+                pos.y - startY
+            );
+
+            ctx.arc(startX, startY, radius, 0, Math.PI * 2);
+        }
+
+        ctx.stroke();
+    }
+}
+
+function stopDrawing() {
+    drawing = false;
+    snapshot = null;
+}
+
 function clearCanvas() {
+    if (!confirm("Deseja apagar todo o desenho?")) return;
+
+    saveState();
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 }
 
-// BAIXAR DESENHO
-function downloadCanvas() {
+function saveImage() {
     const link = document.createElement("a");
-    link.download = "meu-desenho-appcolor.png";
+    link.download = "meu-desenho.png";
     link.href = canvas.toDataURL("image/png");
     link.click();
 }
+
+function hexToRgba(hex) {
+    return [
+        parseInt(hex.slice(1, 3), 16),
+        parseInt(hex.slice(3, 5), 16),
+        parseInt(hex.slice(5, 7), 16),
+        255
+    ];
+}
+
+// Ferramenta balde de tinta
+function floodFill(startX, startY, fillColor) {
+    const image = ctx.getImageData(
+        0, 0, canvas.width, canvas.height
+    );
+
+    const data = image.data;
+    const width = canvas.width;
+    const height = canvas.height;
+
+    const startIndex = (startY * width + startX) * 4;
+
+    const target = [
+        data[startIndex],
+        data[startIndex + 1],
+        data[startIndex + 2],
+        data[startIndex + 3]
+    ];
+
+    if (target.every((v, i) => v === fillColor[i])) return;
+
+    const tolerance = 25;
+
+    function matches(index) {
+        return (
+            Math.abs(data[index] - target[0]) <= tolerance &&
+            Math.abs(data[index + 1] - target[1]) <= tolerance &&
+            Math.abs(data[index + 2] - target[2]) <= tolerance &&
+            Math.abs(data[index + 3] - target[3]) <= tolerance
+        );
+    }
+
+    const stack = [[startX, startY]];
+    const visited = new Uint8Array(width * height);
+
+    while (stack.length) {
+        const [x, y] = stack.pop();
+
+        if (x < 0 || y < 0 || x >= width || y >= height) continue;
+
+        const pixel = y * width + x;
+
+        if (visited[pixel]) continue;
+
+        visited[pixel] = 1;
+
+        const index = pixel * 4;
+
+        if (!matches(index)) continue;
+
+        data[index] = fillColor[0];
+        data[index + 1] = fillColor[1];
+        data[index + 2] = fillColor[2];
+        data[index + 3] = fillColor[3];
+
+        stack.push(
+            [x + 1, y],
+            [x - 1, y],
+            [x, y + 1],
+            [x, y - 1]
+        );
+    }
+
+    ctx.putImageData(image, 0, 0);
+}
+
+// Navegação entre abas
+function showTab(tab) {
+    document.getElementById("editor").style.display =
+        tab === "paint" ? "block" : "none";
+
+    document.getElementById("gallery").style.display =
+        tab === "gallery" ? "block" : "none";
+
+    document.getElementById("tabPaint").classList.toggle(
+        "active", tab === "paint"
+    );
+
+    document.getElementById("tabGallery").classList.toggle(
+        "active", tab === "gallery"
+    );
+}
+
+// Desenhos predefinidos em SVG
+const drawings = [
+    {
+        name: "Gatinho",
+        svg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300">
+        <g fill="white" stroke="black" stroke-width="5" stroke-linejoin="round">
+        <path d="M75 110 L70 35 L130 75 Q150 65 170 75 L230 35 L225 110 Q260 160 230 220 Q200 270 150 270 Q100 270 70 220 Q40 160 75 110Z"/>
+        <ellipse cx="115" cy="145" rx="10" ry="16"/>
+        <ellipse cx="185" cy="145" rx="10" ry="16"/>
+        <path d="M140 180 Q150 195 160 180 M150 190 L150 205 M150 205 Q130 220 120 205 M150 205 Q170 220 180 205" fill="none"/>
+        </g></svg>`
+    },
+    {
+        name: "Borboleta",
+        svg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300">
+        <g fill="white" stroke="black" stroke-width="5">
+        <path d="M145 145 Q80 10 30 75 Q-5 160 135 180 Q45 280 105 270 Q145 250 150 190Z"/>
+        <path d="M155 145 Q220 10 270 75 Q305 160 165 180 Q255 280 195 270 Q155 250 150 190Z"/>
+        <ellipse cx="150" cy="160" rx="12" ry="75"/>
+        <path d="M145 90 Q110 35 105 40 M155 90 Q190 35 195 40" fill="none"/>
+        </g></svg>`
+    },
+    {
+        name: "Flor",
+        svg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300">
+        <g fill="white" stroke="black" stroke-width="5">
+        <circle cx="150" cy="115" r="35"/>
+        <circle cx="150" cy="55" r="35"/>
+        <circle cx="210" cy="115" r="35"/>
+        <circle cx="150" cy="175" r="35"/>
+        <circle cx="90" cy="115" r="35"/>
+        <circle cx="150" cy="115" r="23"/>
+        <path d="M150 175 L150 280 M150 230 Q90 185 85 230 Q110 260 150 250 M150 245 Q205 190 220 230 Q190 265 150 260" />
+        </g></svg>`
+    },
+    {
+        name: "Casinha",
+        svg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300">
+        <g fill="white" stroke="black" stroke-width="5" stroke-linejoin="round">
+        <path d="M35 135 L150 35 L265 135 L245 135 L245 270 L55 270 L55 135Z"/>
+        <rect x="125" y="180" width="55" height="90"/>
+        <rect x="75" y="150" width="35" height="35"/>
+        <rect x="190" y="150" width="35" height="35"/>
+        </g></svg>`
+    },
+    {
+        name: "Peixinho",
+        svg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300">
+        <g fill="white" stroke="black" stroke-width="5">
+        <path d="M45 150 Q120 55 225 150 Q120 245 45 150Z"/>
+        <path d="M225 150 L275 95 L275 205Z"/>
+        <circle cx="100" cy="130" r="8"/>
+        <path d="M145 150 Q170 120 185 150 Q170 180 145 150Z"/>
+        </g></svg>`
+    },
+    {
+        name: "Coração",
+        svg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300">
+        <path d="M150 265 C110 225 30 165 30 105 C30 20 135 15 150 90 C165 15 270 20 270 105 C270 165 190 225 150 265Z" fill="white" stroke="black" stroke-width="6"/>
+        </svg>`
+    }
+];
+
+// Montagem da galeria
+const grid = document.getElementById("drawingGrid");
+
+drawings.forEach((drawing, index) => {
+    const card = document.createElement("div");
+    card.className = "drawing-card";
+
+    const img = document.createElement("img");
+    img.alt = drawing.name;
+    img.src = "data:image/svg+xml;charset=utf-8," +
+        encodeURIComponent(drawing.svg);
+
+    const title = document.createElement("h3");
+    title.textContent = drawing.name;
+
+    const button = document.createElement("button");
+    button.textContent = "🎨 Colorir desenho";
+
+    button.onclick = () => loadDrawing(index);
+
+    card.append(img, title, button);
+    grid.appendChild(card);
+});
+
+function loadDrawing(index) {
+    const drawing = drawings[index];
+
+    const image = new Image();
+
+    image.onload = () => {
+        saveState();
+
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        ctx.fillStyle = "#ffffff";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        const scale = Math.min(
+            (canvas.width - 100) / image.width,
+            (canvas.height - 100) / image.height
+        );
+
+        const width = image.width * scale;
+        const height = image.height * scale;
+
+        ctx.drawImage(
+            image,
+            (canvas.width - width) / 2,
+            (canvas.height - height) / 2,
+            width,
+            height
+        );
+
+        showTab("paint");
+    };
+
+    image.src = "data:image/svg+xml;charset=utf-8," +
+        encodeURIComponent(drawing.svg);
+}
+
+// Inicialização
+ctx.fillStyle = "#ffffff";
+ctx.fillRect(0, 0, canvas.width, canvas.height);
 
 </script>
 
